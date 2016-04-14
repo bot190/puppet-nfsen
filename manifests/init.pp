@@ -162,6 +162,7 @@ class nfsen (
   $custom_repo = false,
   $custom_repo_source = undef,
   $web = true,
+  $useSSL = true,
   $web_ssl_verify_client = 'none',
   $web_ssl_verify_depth = 1,
   $nfdump_version = '1.6.13',

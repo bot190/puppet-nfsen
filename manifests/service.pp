@@ -5,7 +5,11 @@
 class nfsen::service {
 
   assert_private()
-
+    
+  file { '/etc/systemd/system/nfsen.service':
+    ensure    => 'file',
+    content   => templte('nfsen/nfsen.service.erb'),
+  }
   service { 'nfsen':
     ensure    => 'running',
     hasstatus => false,

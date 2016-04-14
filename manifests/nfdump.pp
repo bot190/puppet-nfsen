@@ -23,12 +23,12 @@ class nfsen::nfdump {
   Package[$packages] ->
 
   exec { 'nfdump fetch':
-    command => "wget -q ${_source_uri}/nfdump-${::nfsen::nfdump_version}/nfdump-${::nfsen::nfdump_version}.tar.gz -O- > ${_source_file}",
+    command => "/usr/bin/wget -q ${_source_uri}/nfdump-${::nfsen::nfdump_version}/nfdump-${::nfsen::nfdump_version}.tar.gz -O- > ${_source_file}",
     creates => $_source_file,
   } ->
 
   exec { 'nfdump extract':
-    command => "tar xf ${_source_file}",
+    command => "/bin/tar xf ${_source_file}",
     creates => $_source_dir,
     cwd     => '/tmp',
   } ->
@@ -40,13 +40,13 @@ class nfsen::nfdump {
   } ->
 
   exec { 'nfdump make':
-    command => 'make',
+    command => '/usr/bin/make',
     creates => "${_source_dir}/bin/nfdump",
     cwd     => $_source_dir,
   } ->
 
   exec { 'nfdump make install':
-    command => 'make install',
+    command => '/usr/bin/make install',
     creates => '/usr/local/bin/nfdump',
     cwd     => $_source_dir,
   }

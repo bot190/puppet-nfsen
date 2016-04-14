@@ -23,11 +23,11 @@ class nfsen::repo {
     $_source_uri = 'http://sourceforge.net/projects/nfsen/files/stable'
     $_source_file = "/tmp/nfsen-${::nfsen::version}.tar.gz"
 
-    exec { "wget -q ${_source_uri}/nfsen-${::nfsen::version}/nfsen-${::nfsen::version}.tar.gz -O- > ${_source_file}":
+    exec { "/usr/bin/wget -q ${_source_uri}/nfsen-${::nfsen::version}/nfsen-${::nfsen::version}.tar.gz -O- > ${_source_file}":
       creates => $_source_file,
     } ~>
 
-    exec { "tar xf ${_source_file} -C /opt --transform 's!^[^/]\\+\\($\\|/\\)!nfsen\\1!'":
+    exec { "/bin/tar xf ${_source_file} -C /opt --transform 's!^[^/]\\+\\($\\|/\\)!nfsen\\1!'":
       creates => '/opt/nfsen',
     }
 

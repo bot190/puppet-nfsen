@@ -1,0 +1,13 @@
+[Unit]
+Description=NfSen Service
+After=network.target
+
+[Service]
+Type=forking
+PIDFile="<%= @_vardir %>"/nfsend.pid
+ExecStart="<%= @_bindir %>"/nfsen start
+ExecStop="<%= @_bindir %>"/nfsen stop
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
