@@ -14,6 +14,7 @@ class nfsen::web {
     if $::nfsen::useSSL {
       include ::apache::mod::ssl
       apache::vhost { 'nfsen':
+        manage_docroot  => false,
         servername      => $::fqdn,
         port            => 80,
         docroot         => $::nfsen::htmldir,
@@ -21,6 +22,7 @@ class nfsen::web {
         redirect_dest   => "https://${::fqdn}",
       } ->
       apache::vhost { 'nfsen_ssl':
+        manage_docroot  => false,
         servername        => $::fqdn,
         port              => 443,
         docroot           => $::nfsen::htmldir,
@@ -34,6 +36,7 @@ class nfsen::web {
       }
      } else {
       apache::vhost { 'nfsen':
+        manage_docroot  => false,
         servername      => $::fqdn,
         port            => 80,
         docroot         => $::nfsen::htmldir,

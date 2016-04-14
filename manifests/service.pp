@@ -5,10 +5,11 @@
 class nfsen::service {
 
   assert_private()
-    
+  $_piddir = $nfsen::piddir
+  $_bindir = $nfsen::bindir
   file { '/etc/systemd/system/nfsen.service':
     ensure    => 'file',
-    content   => templte('nfsen/nfsen.service.erb'),
+    content   => template('nfsen/nfsen.service.erb'),
   }
   service { 'nfsen':
     ensure    => 'running',

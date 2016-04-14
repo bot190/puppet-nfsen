@@ -56,7 +56,7 @@ class nfsen::configure {
 
   # Prompts for perl path *sigh*
   # TODO: perhaps 'echo ${perl_path}' rather than 'yes'
-  exec { 'yes "" | /opt/nfsen/install.pl etc/nfsen.conf':
+  exec { '/usr/bin/yes "" | /opt/nfsen/install.pl etc/nfsen.conf':
     cwd     => '/opt/nfsen',
     creates => $_basedir,
   }

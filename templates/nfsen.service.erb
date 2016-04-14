@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 Type=forking
-PIDFile="<%= @_vardir %>"/nfsend.pid
-ExecStart="<%= @_bindir %>"/nfsen start
-ExecStop="<%= @_bindir %>"/nfsen stop
+PIDFile=<%= @_piddir %>/nfsend.pid
+ExecStart=<%= @_bindir %>/nfsen start
+ExecStop=<%= @_bindir %>/nfsen stop
 Restart=on-abort
 
 [Install]
