@@ -10,7 +10,7 @@ class nfsen::web {
 
     include ::apache
     include ::apache::mod::php
-   
+
     if $::nfsen::useSSL {
       include ::apache::mod::ssl
       apache::vhost { 'nfsen':
@@ -22,7 +22,7 @@ class nfsen::web {
         redirect_dest   => "https://${::fqdn}",
       } ->
       apache::vhost { 'nfsen_ssl':
-        manage_docroot  => false,
+        manage_docroot    => false,
         servername        => $::fqdn,
         port              => 443,
         docroot           => $::nfsen::htmldir,
@@ -34,12 +34,12 @@ class nfsen::web {
         ssl_verify_client => $::nfsen::web_ssl_verify_client,
         ssl_verify_depth  => $::nfsen::web_ssl_verify_depth,
       }
-     } else {
+    } else {
       apache::vhost { 'nfsen':
-        manage_docroot  => false,
-        servername      => $::fqdn,
-        port            => 80,
-        docroot         => $::nfsen::htmldir,
+        manage_docroot => false,
+        servername     => $::fqdn,
+        port           => 80,
+        docroot        => $::nfsen::htmldir,
       }
     }
     # Link in the web frontend

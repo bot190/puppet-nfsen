@@ -1,12 +1,50 @@
-rvm:
-- 1.9.3
+---
+sudo: false
+dist: trusty
+language: ruby
+cache: bundler
+before_install:
+  - bundle -v
+  - rm -f Gemfile.lock
+  - gem update --system
+  - gem update bundler
+  - gem --version
+  - bundle -v
 script:
-- bundle exec rake lint
-- bundle exec rake validate
-- BEAKER_set=openstack-ubuntu BEAKER_debug=yes bundle exec rake beaker
+  - 'bundle exec rake $CHECK'
+bundler_args: --without system_tests
+rvm:
+  - 2.4.1
 env:
-  global:
-  - secure: soaLCzoLjkyTSUk3SVwe8jDB3PRDoLCsQj8hTGvjWMYCs6ys7OtATOhbD+TjkmN2UR5oFTj9s3ATlXfJxRtYfJybXs4wGYiBlX6GeOPP2MIrCVjh/3vRcujQvSR8wQ0k7TdYb4/UJ/liKw4NmwNQ2/xKivMj4DxyIdA84H/vvLs+I+RtTHbueHuPbH254a2EPCyECA1ro5cvZK/p4kYoMJeYtRHfX1Uex/uNggrYTEmDXRqPdndrGxQXCGCLPxT3bFw6cZUNaW5ICzn6Mq2D4CImmb2jI+GL/OG5oJQXaFm0fIKUq9dvqkoXmg+Ggac2LVIwfpKR73R53loCgmHygijZhlzJjQ/ySBNyu3iflvszMYBN3nls6+en430KF5Y9R0XvFUarYaS8GM/74p81usLDNnbLRKQj/bBNKKIVdG6fSRlqd54a2VADuo1v+W4qa0R5zaOgr3W7iOK2MWFtu438AkoXjm6qtRow8ABYT4OR6e80Ie0MmYPjph+DNVYLEu09lYnv6nqLoVOJixnydy2DTWCIitvZ0TCjei4JcXhAffN+Fhkrkuro3TZywrM8dq6wwopaYw2hmd/OJyUY9uFDry2Js3vEUvEXX8LOGhQChhdo9zDR+oZhPC8VItmuQB4Z0eoLkH8o7wPhQ3gVeW4Aqf/PMC0pzekdr65p/qE=
-  - secure: NrwiJ8w3pgG3pe8pJhXCDR6iK+4jMQERqRgZ55HQYgB6dqL2G2RdaSw5mGr8UYo9g0toYXH1w2jUtB6SaSdGFsNHvbtPnH1Jwf+hxzYwYyatksWXGYx2prA0J8CGb4ElpDSAsmJYu+sfO+9kwKBI7N+UnCtsZrfHsciPbi/hehPFUQ5g+Spp6bUYCKuB3z7nxvX1NfcPqqPp3b8EH7iAX3sptk3g66aYdayqZbB+R+n1gS7JaQxEPuR8rSzmSfn/EWyeb/N2awiPxzmqqg6kek/GeeJhRu1po2v6UvMTWOBBrLY9otxbPPFQL12j0NZRRpk8geqasq9czusY7K57BAWTefZBymejWBJNbytrrx+3zeTDCpTTQcQYtmrXuV9NELbto1EeWbU2Vhop3v3K9vOYo1ZazBzeKcBZlkP9+QKdehovzmjdtoq4Fl06tMvEHLnGjCC/lVoB/ZN37aNdA/VrFQL28LLb17CS5g3mjHk4jb7+wlodM6sE3S0hl5LqW1pm4tbBfwkKxREEUdDJYsbk4ATtMg5UdHF/u9IkF4BKxRPCZfROk5qLtHqvinjwoEOQK3QCSdC3tBzDBHAPze0rMFeHNL1ITEzqDCPEw5qCq9udz59u5LBslA1LKMQpp5GYiI7V2QUR+ofrICy2+hxfzPPFAWFxI6eFaIMo18I=
-  - secure: mi37gyZkQOEwVRdjW0UA6qPRnlS+1U/hjgAXSCN7j/4RMkUllrhwV64VQRZH4IIzhRQm9nUhLegZtHmqFJ1YoDRsWUWbV23W+aLQZox6+bUCyhQO+63YMRAXOCXPbKRfqDoDBO138IVEFfRUbzbY+NiR9oKv6UHegu6EJFHD5LNCe8MSVFRqymAfLU4lI+TaZJ/rmogh/gmPhyDWZQw7b4oav/0I93nbZnkFnZtOlUXE9aYnxZEk0ca/M1GL8ka1H+5+5ZuU/ESXMcAI1kerFTbsMIo6Vyr6DU3gYg7D7LIzJ6fv4h6P3/1xfkGIBV2jAcU/T87S3StKHhtvnJdIdlqfFb63+/gORHV/yACqTj6998gx8n8HQqWVL0DBCqo4gNQkROo0M81f5X/EwG0StF1GKCu8EN2iuKSCRtl8rX7KxoRZpAL72+Ib/vT4VIe+SX6WucDyDOm4beSNXGTxMBgRqmLOZRhj+4MjPdnf4S1YOkHYBVb8ulVTu9WfI8Ur9bFEF3NASCjHMXMhuU1y2Mfex04ncfhe9VRR6K8mOwlqemii5dwIKTR9Od9ybw46pu/vo7fIzvbT87pfXp0YdskUAB3wh1Ckm5A78JdYrNtU13pkFwW6E/Ng/CXr3GjQ7/5ujs442UUwSm4fqs75xl1liCklJN5q7SBC+C4Fks8=
-  - secure: JGsIj4cRpLknjGHTbBxzxjaPbRW3uu5Nlc9ul01ISmmwnPeHDOZB8RYBHQ10qR963fwPjtz5NMzNq7Y9oyQ/1FaEG4DgoFCwkdm3SAHJ5bgI2wZf8ap5mqDZPc17ezWrZRrRUgAESrHMWbFbIkY7BhtwQrZq+LLSHJvjQ/vGhGYcB5lMgiEh3tLeDOX3HWzJxeYJqP4E4Yd3aSWFS8aFH5Uno5HL5fbLEM65FadwFPRZ2+tPr0Z/HaE7D+snzscx3LKnzBz10+NlvFAaUw9GK+YSrmbaSGds8aYwirv29sldo5rGqPUOSgK4J1GtWsbdnL93AHmM3RDmP44A4DmBpLL2t2mIGR74YMpP/RVHRYt5HkCo9n7teRC/BVgqIrxIzB8tz2vLs7E2TXD0zYQrpkY4OEZ462zTy+X3h3Z7GGuOYnb6SDoyTf3EVXA0O/4Aymi6kb2GteBD7Fq7ihFs6mOYQ/2PA1jqBW5xMZsdMEkZ42PV02+IEtULlOVW4AyAaZKzn/u6A9CGjsZmf783GdPGMbwj6QhVbXf1QKyVbx6Sgck1lEmp7wyxdSS+5zXsq8uOOznWGdU1pfLTOdCZJmRnWSCR0NUOJKnboepz3mC7hJgX2FP/pX1LVdfHitgRtNserd+S7QK6FrnvqTU/qUr4mvuIyKbsTXLA/p9wJGk=
+  - PUPPET_GEM_VERSION="~> 5.0" CHECK=spec
+matrix:
+  fast_finish: true
+  include:
+    -
+      env: CHECK=rubocop
+    -
+      env: CHECK="syntax lint"
+    -
+      env: CHECK=metadata_lint
+    -
+      env: CHECK=release_checks
+    -
+      env: CHECK=spec
+    -
+      env: PUPPET_GEM_VERSION="~> 4.0" CHECK=spec
+      rvm: 2.1.9
+branches:
+  only:
+    - master
+    - /^v\d/
+notifications:
+  email: false
+deploy:
+  provider: puppetforge
+  user: puppet
+  password:
+    secure: ""
+  on:
+    tags: true
+    all_branches: true
+    condition: "$DEPLOY_TO_FORGE = yes"

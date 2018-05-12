@@ -96,7 +96,7 @@ $WWWUSER  = "<%= @_wwwuser %>";
 $WWWGROUP = "<%= @_wwwgroup %>";
 
 # Receive buffer size for nfcapd - see man page nfcapd(1)
-$BUFFLEN = <%= @_bufflen %>;
+$BUFFLEN = '<%= @_bufflen %>';
 
 # list of extensions for each collector. See argument -T 
 # for nfcapd(1) for more detailes.
@@ -120,13 +120,13 @@ $EXTENSIONS = '<%= @_extensions %>';
 # 6 %Y/%j/%H    year/day-of-year/hour
 # 7 %Y-%m-%d    year-month-day
 # 8 %Y-%m-%d/%H year-month-day/hour
-$SUBDIRLAYOUT = <%= @_subdirlayout %>;
+$SUBDIRLAYOUT = '<%= @_subdirlayout %>';
 
 # Compress flows while collecting 0 or 1
-$ZIPcollected  = <%= @_zipcollected ? "1" : "0" %>;
+$ZIPcollected  = '<%= @_zipcollected ? "1" : "0" %>';
 
 # Compress flows in profiles 0 or 1
-$ZIPprofiles   = <%= @_zipprofiles ? "1" : "0" %>;
+$ZIPprofiles   = '<%= @_zipprofiles ? "1" : "0" %>';
 
 # Interrupt expire -- not yet enabled as not yet fully tested
 #$InterruptExpire = 0;
@@ -134,11 +134,11 @@ $ZIPprofiles   = <%= @_zipprofiles ? "1" : "0" %>;
 # number of nfprofile processes to spawn during the profiling phase
 # depends on how busy your system is and how many CPUs you have
 # on very busy systems increase it to a higher value
-$PROFILERS = <%= @_profilers %>;
+$PROFILERS = '<%= @_profilers %>';
 
 # if the PROFILEDATADIR is filled up to this percentage, a warning message will be printed.
 # set to 0 to disable the test
-$DISKLIMIT = <%= @_disklimit %>;
+$DISKLIMIT = '<%= @_disklimit %>';
 
 # Netflow sources
 # Define an ident string, port and colour per netflow source
@@ -165,9 +165,9 @@ $DISKLIMIT = <%= @_disklimit %>;
 #);
 
 %sources = (
-     <% @_sources.each do |source| %> 
-       '<%= source['name'] %>' => { 'port' => '<%= source['port'] %>' <%= ", 'col' => '#{source['col']}'" if source['col'] %> <%= ", 'type' => '#{source['type']}'" if source['type'] %>  <%= ", 'IP' => '#{source['ip']}'" if source['ip'] %> },
-     <% end %>
+    <% @_sources.each_value do |source| %> 
+      '<%= source['name'] %>' => { 'port' => '<%= source['port'] %>' <%= ", 'col' => '#{source['col']}'" if source['col'] %> <%= ", 'type' => '#{source['type']}'" if source['type'] %>  <%= ", 'IP' => '#{source['ip']}'" if source['ip'] %> },
+    <% end %>
 );
 
 #
